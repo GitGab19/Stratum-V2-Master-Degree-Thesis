@@ -16,3 +16,12 @@ In addition to this, the thesis introduces the Stratum Reference Implementation 
 The research concludes with a reflection on the advancements made in Stratum V2 and their implications for the future of Bitcoin pooled mining. The concept of SV2 protocol benchmarking is introduced, along with the exploration of non-custodial pools as a promising pathway for future innovation.
 Overall, this thesis aims to dig into the profound significance of Stratum V2 as a transformative protocol in the domain of Bitcoin pooled mining, and its potential to shape the landscape of mining practices in the years to come.
 </p>
+
+### Chapters
++ Chapter 1: '[Introduction](./Source/Chapter1/Introduction.tex)'
++ Chapter 2: '[Bitcoin](./Source/Chapter2/)'
++ Chapter 3: '[Mining](./Source/Chapter3/)'
++ Chapter 4: '[History of pooled mining protocols](./Source/Chapter4/)'
++ Chapter 5: '[Stratum V2](./Source/Chapter5/)'
++ Chapter 6: '[Stratum Reference Implementation (SRI)](./Source/Chapter6/)'
++ Chapter 7: '[Conclusion](./Source/Chapter7/Conclusion.tex)'

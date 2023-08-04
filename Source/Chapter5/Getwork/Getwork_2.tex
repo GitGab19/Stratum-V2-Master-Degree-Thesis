@@ -1,0 +1,115 @@
+Getwork is a JSON-RPC method sent over a HTTP transport.
+If it's called without any argument, it provides a pre-processed block header to work on, contained in the data key field. During this process, little endian byte order is used; in addiction to this, due to the getwork implementation in Bitcoin Core, every 4 bytes chunks are byte swapped. 
+To check the code which swaps the chunks, it's possible to have a look at lines 196-198 in "src/rpcmining.cpp" contained in commit \href{https://github.com/bitcoin/bitcoin/pull/2905/commits/1f3bfa329f96b0e4564c410b539765909601ad1d#diff-aef7835a9e55f9cd866fb418fa6fc7c49f200540746812da4ef44b53cd115e4bL196}{\textit{1f3bfa329f96b0e4564c410b539765909601ad1d}} of Bitcoin Core. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{Figures/getwork/getwork5.png}
+    \caption{Getwork method details and parameters}
+    \label{fig:getwork5}
+\end{figure}
+\noindent For this reason, before starting to hash the header received, miner must do some bytes manipulation on data, which will be illustrated in the following examples.
+\subsubsection{Example N.1:  \underline{data} content present in the response of a getwork \underline{request}}
+
+\colorbox{red}{00000002}\colorbox{lightgray}{0597ba1f0cd423b2a3abb0259a54ee5f783077a4ad45fb620000021800000000}\\\colorbox{orange}{8348d1339e6797e2b15e9a3f2fb7da08768e99f02727e4227e02903e43a42b31}\colorbox{cyan}{51155310}\\\colorbox{yellow}{1a051f3c}\colorbox{green}{00000000} 0000008000000000000000000000000000000000000000000000000\\00000000000000000000000000000000080020000
+
+\begin{itemize}
+    \item \colorbox{red}{\textbf{Version}} --> 4 bytes --> 0x00000002  
+    \item \colorbox{lightgray} {\textbf{Prev\_block\_hash}} --> (need to transform it) --> 0597ba1f0cd423b2a3abb0\\259a54ee5f783077a4ad45fb620000021800000000 --> from little endian to big endian (every 4 bytes chunks) --> 1fba9705b223d40c25b0aba35fee549aa477307\\862fb45ad1802000000000000 --> reverse (every byte) --> \textbf{0000000000000218\\ad45fb62783077a49a54ee5fa3abb0250cd423b20597ba1f} \\\\
+    This is the hash of previous block's header of  block at height 220249, which is the hash of block 220248. 
+    \item \colorbox{orange}{\textbf{Merkle root}} --> transform it as the Prev\_block\_hash --> 32 bytes  
+    \item \colorbox{cyan}{\textbf{\textbf{Timestamp}}} --> 4 bytes --> 0x51155310 (hex) --> 1360352016 (dec) --> \\\textbf{8 February 2013 19:33:36}  
+    \item \colorbox{yellow}{\textbf{\textbf{nBits}}} --> 4 bytes --> \textbf{0x1a051f3c} 
+    \item \colorbox{green}{\textbf{\textbf{Nonce}}} --> 4 bytes --> \textbf{0} (initial value) 
+\end{itemize}
+\medskip
+At this point, to mine the work received in the response, the miner need first byte swap each 32-bit chunk from little-endian to big-endian:\\\\
+\colorbox{red}{02000000}\colorbox{lightgray}{1fba9705b223d40c25b0aba35fee549aa477307862fb45ad1802000000000000}\\\colorbox{orange}{33d14883e297679e3f9a5eb108dab72ff0998e7622e427273e90027e312ba443}\colorbox{cyan}{10531551}\\\colorbox{yellow}{3c1f051a}\colorbox{green}{00000000}
+8000000000000000000000000000000000000000000000000000000\\00000000000000000000000000000000000000280
+\newline\newline
+Take the first 80 bytes (block template header):\\\\
+\colorbox{red}{02000000}\colorbox{lightgray}{1fba9705b223d40c25b0aba35fee549aa477307862fb45ad1802000000000000}\\\colorbox{orange}{33d14883e297679e3f9a5eb108dab72ff0998e7622e427273e90027e312ba443}\colorbox{cyan}{10531551}\\\colorbox{yellow}{3c1f051a}\colorbox{green}{00000000}
+\newline\newline
+Hash them (SHA-256) twice, changing the nonce value, until a value which is lower than the difficulty target is reached.\\
+\subsubsection{Example N.2: \underline{data} content present in the response of a getwork \underline{request}}
+
+\colorbox{red}{00000002}\colorbox{lightgray}
+{b15704f4ecae05d077e54f6ec36da7f20189ef73b77603225ae56d2b00000000}\\\colorbox{orange}{bcf59695a4e35a2f7535e1a86b306a3b08c212bf0b833764018fe39f01919381}\colorbox{cyan}{510c2811}\\\colorbox{yellow}{1c0e8a37}\colorbox{green}{00000000} 000000800000000000000000000000000000000000000000000000\\000000000000000000000000000000000080020000
+
+\begin{itemize}
+    \item \colorbox{red}{\textbf{Version}} --> 4 bytes --> 0x00000002  
+    \item \colorbox{lightgray} {\textbf{Prev\_block\_hash}} --> (need to transform it) -->
+    b15704f4ecae05d077e54f6e\\c36da7f20189ef73b77603225ae56d2b00000000 --> from little endian to big endian (every 4 bytes chunks) --> 
+    f40457b1d005aeec6e4fe577f2a76dc373ef8901220\\376b72b6de55a00000000 --> reverse (every byte) --> \textbf{
+    000000005ae56d2bb77\\603220189ef73c36da7f277e54f6eecae05d0b15704f4} \\\\
+    This is the hash of previous block's header of  block at height 49133 of the bitcoin testnet, which is the hash of block 49132.
+    \item \colorbox{orange}{\textbf{Merkle root}} --> transform it as the Prev\_block\_hash --> 32 bytes  
+    \item \colorbox{cyan}{\textbf{\textbf{Timestamp}}} --> 4 bytes -->  0x510c2811 (hex) --> 1359751185 (dec) --> \\\textbf{1 February 2013 20:39:45}  
+    \item \colorbox{yellow}{\textbf{\textbf{nBits}}} --> 4 bytes --> \textbf{0x1c0e8a37} 
+    \item \colorbox{green}{\textbf{\textbf{Nonce}}} --> 4 bytes --> \textbf{0} (initial value)\\\\ 
+\end{itemize}
+Now, to mine the work received by the response, same operations on data field than before has to be done (bytes swapping, hashing twice SHA-256). \\
+After that, a \textbf{HTTP POST request} must be sent to pool server to submit the valid block.\\
+\begin{verbatim}
+    POST / HTTP/1.1
+    Authorization: Basic Y2RlY2tlcjphYmMxMjM=
+    Host: localhost:18332
+    Content-type: application/json
+    X-Mining-Extensions: longpoll midstate rollntime submitold
+    Content-Length: 305
+    User-Agent: cgminer 2.8.1
+    {
+    "method": "getwork", 
+    "params": [ "00000002b15704f4ecae05d077e54f6ec36da7f20189ef
+    73b77603225ae56d2b00000000b052cbbdeed2489ccb13a526b77fadcee
+    f4caf7d3bb82a9eb0b69ebb90f9f5a7510c27fd1c0e8a37fa5313380000
+    00800000000000000000000000000000000000000000000000000000000
+    000000000000000000000000080020000"],
+    "id":1
+    }
+\end{verbatim}
+\newpage
+
+\subsubsection{Example N.3: getwork \underline{complete} protocol flow}
+
+\begin{enumerate}
+    \item \textbf{getwork \textit{request}:}
+    \begin{verbatim}
+    {"method":"getwork","params": [],"id":1}
+    \end{verbatim}
+    \item \textbf{getwork \textit{response}:}
+    \begin{verbatim}
+    {"id": "1", 
+    "result": {
+        "hash1":"0000000000000000000000000000000000000000000
+        0000000000000000000000000008000000000000000000000000
+        000000000000000000000000000010000",
+        "data":"00000001c570c4764aadb3f09895619f549000b8b51a
+        789e7f58ea750000709700000000103ca064f8c76c390683f820
+        3043e91466a7fcc40e6ebc428fbcc2d89b574a864db8345b1b00
+        b5ac000000000000008000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000008002
+        0000",
+        "midstate":"e772fc6964e7b06d8f855a6166353e48b2562de4
+        ad037abc889294cea8ed1070", 
+        "target":"ffffffffffffffffffffffffffffffffffffffffff
+        ffffffffffffff00000000"
+    },
+    "error": null}
+    \end{verbatim}
+    \item \textbf{Same operations on data field than before} (bytes swapping, hashing twice SHA-256)
+        
+    \item \textbf{getwork request \textit{sending a valid proof of work}:}
+    \begin{verbatim}
+    {"method": "getwork",
+    "params":
+        ["0000000141a0e898cf6554fd344a37b2917a6c7a6561c20733b09
+        c8000009eef00000000d559e21882efc6f76bbfad4cd13639f4067c
+        d904fe4ecc3351dc9cc5358f1cd54db84e7a1b00b5acba97b604000
+        0008000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000080020000"],
+    "id":1
+    }    
+    \end{verbatim}
+    
+\end{enumerate}

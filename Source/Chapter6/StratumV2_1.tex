@@ -1,0 +1,29 @@
+Stratum V2 was initially proposed in the year of 2019. It was introduced by Pavel Moravec and Jan \v{C}apek (the two founders of the company called Braiins), in collaboration with Matt Corallo and other experts in the mining field. \\ Stratum V2 was proposed with a specific purpose in mind: to address the limitations and shortcomings (analyzed in the previous chapter) of its predecessor, Stratum V1. The introduction of Stratum V2 aimed to overcome the inefficiencies, lack of security measures, and inadequate performance associated with the JSON-based Stratum V1 protocol.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{Figures/sv2/sv2_1.png}
+    \caption{Pavel Moravec, Jan \v{C}apek and Matt Corallo, co-authors of SV2 specs}
+    \label{fig:sv2_1}
+\end{figure}
+
+As the Bitcoin mining industry continued to mature and expand, there was a growing need for a more efficient and secure solution. Stratum V2 was proposed to meet these evolving demands, offering a precise and well-defined protocol for pooled mining operations. By incorporating authentication, optimizing data transfers, and enhancing security against potential attacks, Stratum V2 aims to provide a more streamlined, robust, and reliable framework for miners, proxies, and pool operators.
+
+\noindent To encapsulate the principal aspects of its predecessor, Stratum V1, which SV2 aims to address, they can be classified into four categories: 
+\begin{itemize}
+    \item \textbf{Security concerns}\\
+    As described in the previous chapter, no security measures against MITM attacks are takled, by protocol. In addiction to this, no strong authentication mechanism are considered in the Stratum (V1) protocol.
+    \item \textbf{Data encoding inefficiencies}\\
+    Messages payload in Stratum (V1) is JSON-encoded: it has been revelead a very winning technique at the time of its announcement (2012), due to its simplicity for debugging and implementation purposes. However, JSON is not the most optimal method for encoding specialized data, compared to more compact binary protocols.
+    \item \textbf{Transaction selection centralization}\\
+    In Stratum (V1) protocol, the mining pool server is responsible for selecting which transactions are included in the block that miners are trying to solve. This means that the mining pool operators have control over which transactions are prioritized and included in the block's transaction list. This can undermine the censorship resistance of the network.
+    \item \textbf{Non-standardization}\\
+    The Stratum (V1) protocol was announced by Marek "Slush" Palatinus in 2012, and it received criticism for its lack of community-centeredness. Additionally, it suffers from inadequate documentation and a lack of standardized shared specifications. For example, biggest mining farm typically use some custom proxies which are helpful in the connections aggregation, but they are not standardized someway by the protocol.
+    \item \textbf{Lack of flexibility}\\
+     Stratum (V1) is considered to be a relatively simple and basic protocol. However, it lacks built-in mechanisms for easy upgrades or extensions. This can make it challenging to introduce new features, improve security, or address emerging issues.\\\\
+\end{itemize}
+In the next section, there will be deeply explanations about the differences between Stratum V2 and Stratum (V1), focusing on the enhancements brought by Stratum V2, to specifically solve the above-mentioned issues relative to Stratum (V1).
+
+\noindent To dig more into this first overview of the main Stratum (V1) issues and how Stratum V2 aims to solve them, it's recommended to listen the interview to the co-authors of the protocol available on Youtube \cite{sv2video}.
+
+

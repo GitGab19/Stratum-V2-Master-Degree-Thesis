@@ -1,0 +1,25 @@
+In conclusion, Stratum (V1) protocol, introduced in 2012, significantly improved the performances of pooled mining operations by efficiently distributing jobs to miners and managing in a brilliant way the load on the mining pool servers. However, as described in the previous sub-chapters, its development was primarily focused on performance over security. 
+To better resume the overall evaluation of the protocol which became the standard "de facto" in the pooled mining context, it's better to analyze its pros and cons.
+\medskip
+
+\noindent \textbf{Pros}:
+\begin{enumerate}
+    \item \textbf{Efficiency}: Stratum (V1) has demonstrated high efficiency and scalability in managing pooled mining operations. It effectively distributes jobs to miners, optimizing the overall mining process.
+    \item \textbf{Easy implementation}: the simplicity of the Stratum (V1) protocol made it relatively easy to be implemented and integrated into mining software, firmware, and hardware. This has contributed to its widespread adoption and compatibility across different mining setups.
+    \item \textbf{Wide adoption}: Stratum (V1) has been widely adopted in the Bitcoin mining industry. Its widespread usage has led it to be the "de-facto" standardized communication protocol, allowing miners to easily connect with various mining pools.
+\end{enumerate}
+\medskip
+
+\noindent \textbf{Cons}:
+\begin{enumerate}
+    \item \textbf{Security vulnerabilities}: Stratum (V1) lacks crucial security features. The protocol relies on plaintext communication, making it sensible to attacks such as hashrate stealing. 
+    \item \textbf{Privacy concerns}: the absence of encryption in Stratum V1 exposes sensitive information, including plaintext mining pool subscriptions and job data. This compromises miners' privacy and makes their activities easily traceable.
+    \item \textbf{Limited authentication}: Stratum (V1) lacks robust authentication mechanisms, making it vulnerable to man-in-the-middle attacks. This increases the risk of miners connecting to malicious or untrusted pools.
+    \item \textbf{Data bandwidth}: the payload of Stratum (V1) messages is encoded JSON-RPC, so it can be more efficient, saving precious bandwidth during mining operations.
+    \item \textbf{Centralization risks}: since the transactions selection is delegated to the mining pool servers, Stratum (V1) contributes to the centralization of mining power as mining pool operators hold significant control and responsibility in job distribution. This concentration of power raises concerns regarding network resilience, decentralization, and censorship-resistance of the entire network. 
+\end{enumerate}
+
+\medskip
+
+To address these security and efficiency concerns, and provide a more optimized protocol, the development of Stratum V2 became necessary. Stratum V2 aims to fix the vulnerabilities of its predecessor by introducing encryption and other security mechanisms. It focuses on enhancing the security, privacy, and efficiency of pooled mining operations.
+By incorporating new sub-protocols like job negotiation,  encrypted communication channels, and binary framing, Stratum V2 aims to provide a more secure, efficient, and decentralized framework, for miners and mining pool operators. 

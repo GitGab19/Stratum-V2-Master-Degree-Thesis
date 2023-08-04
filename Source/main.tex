@@ -1,0 +1,304 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = IsoLatin
+
+\documentclass[a4paper,12pt,twoside,english]{toptesi}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a-1b]{pdfx}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{spverbatim}
+\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{paracol}% support floats
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\colorlet{punct}{red!80!black}
+\colorlet{delim}{blue!80!black}
+\colorlet{numb}{orange!80!black}
+\lstdefinelanguage{json}{
+    basicstyle=\fontsize{11}{12}\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{backcolour},
+    literate=
+%     *{0}{{{\color{numb}0}}}{1}
+%      {1}{{{\color{numb}1}}}{1}
+%      {2}{{{\color{numb}2}}}{1}
+%      {3}{{{\color{numb}3}}}{1}
+%      {4}{{{\color{numb}4}}}{1}
+%      {5}{{{\color{numb}5}}}{1}
+%      {6}{{{\color{numb}6}}}{1}
+%      {7}{{{\color{numb}7}}}{1}
+%      {8}{{{\color{numb}8}}}{1}
+%      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+\lstdefinestyle{pythonStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstdefinestyle{bashStyle}{
+  language=bash,
+  basicstyle=\small\sffamily,
+  frame=tb,
+  columns=fullflexible,
+  backgroundcolor=\color{blue!25},
+  linewidth=\linewidth,
+  xleftmargin=0.002\linewidth,
+  breaklines=true,
+  literate =
+    {'}{{\textquotesingle}}1
+    {-}{{-}}1
+}
+\usepackage{caption}
+
+% Definition of a new language for listings
+%\lstdefinelanguage{P4}
+%{
+%	% list of keywords
+%	alsoletter=\#,
+%	morekeywords={
+%		header\_type,
+%		fields,
+%		header,
+%		parser,
+%		extract,
+%		return,
+%		default,
+%		next,
+%		\#define,
+%		latest,
+%		select,
+%		apply,
+%		control,
+%		table,
+%		reads,
+%		actions,
+%		modify\_field,
+%		action,
+%		valid,
+%		nop,
+%		exact,
+%		lpm,
+%		if,
+%		hit,
+%		and,
+%		extern,
+%		void,
+%		bit
+%	},
+%	sensitive=true, % keywords are not case-sensitive
+%	morecomment=[l]{//}, % l is for line comment
+%	morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+%	morestring=[b]" % defines that strings are enclosed in double quotes
+%}
+%
+%\definecolor{eclipseBlue}{RGB}{42,0.0,255}
+%\definecolor{eclipseGreen}{RGB}{63,127,95}
+%\definecolor{eclipsePurple}{RGB}{127,0,85}
+%
+%\lstset{
+%	language={P4},
+%	basicstyle=\fontsize{8}{9}\ttfamily, % Global Code Style
+%	captionpos=b, % Position of the Caption (t for top, b for bottom)
+%	extendedchars=true, % Allows 256 instead of 128 ASCII characters
+%	tabsize=2, % number of spaces indented when discovering a tab 
+%	columns=fixed, % make all characters equal width
+%	keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+%	showstringspaces=false, % lets spaces in strings appear as real spaces
+%	breaklines=true, % wrap lines if they don't fit
+%	frame=trbl, % draw a frame at the top, right, left and bottom of the listing
+%	%frameround=tttt, % make the frame round at all four corners
+%	framesep=4pt, % quarter circle size of the round corners
+%	numbers=left, % show line numbers at the left
+%	numberstyle=\tiny\ttfamily, % style of the line numbers
+%	commentstyle=\color{eclipseGreen}, % style of comments
+%	keywordstyle=\color{eclipsePurple}, % style of keywords
+%	stringstyle=\color{eclipseBlue}, % style of strings
+%}
+
+\hypersetup{%
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={blue},
+    citecolor={blue},
+    urlcolor={black}
+  }
+
+\newtheorem{osservazione}{Osservazione}% Standard LaTeX
+\newtheorem{definition}{Definition}
+
+
+\begin{document}
+\english
+
+\ateneo{Politecnico di Torino}
+
+\logosede[9cm]{Cover/polito_logo_2021_blu}
+
+\corsodilaurea{Computer Engineering}
+
+\titolo{Stratum V2: the next generation protocol for Bitcoin pooled mining}
+
+\candidato{Gabriele \textsc{Vernetti}}
+\relatore{Prof.\ Antonio J. \textsc{Di Scala}}
+\tutoreaziendale{Francesco \textsc{Sannicolo'}}
+\sedutadilaurea{\textsc{Academic~Year} 2022-2023}
+
+
+
+\CorsoDiLaureaIn{Master Degree course in\space}
+\TesiDiLaurea{Master Degree Thesis}
+\InName{in}
+\CandidateName{Candidate}
+\AdvisorName{Supervisors}
+\NomeTutoreAziendale{Company Supervisor\\Alps Blockchain}
+
+
+\frontespizio* % make cover page
+
+\ringraziamenti
+\input{acknowledgments}
+
+\abstract
+\input{abstract}
+
+\indici
+\listoffigures
+
+\mainmatter
+
+\chapter{Introduction}
+\input{Chapter1/Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Bitcoin}
+\section{What is Bitcoin}
+\input{Chapter2/Bitcoin_1}
+\newpage
+\section{How the network is composed}
+\input{Chapter2/Bitcoin_2}
+\newpage
+\section{Proof of Work}\label{sec:pow}
+\input{Chapter2/Bitcoin_3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Mining}\label{chapt:mining}
+\input{Chapter3/Mining_0}
+\section{How mining works}
+\input{Chapter3/Mining_1}
+\newpage
+\section{Mining history and evolution}
+\input{Chapter3/Mining_2}
+\newpage
+\section{Solo mining and Pooled mining}\label{sec:pooled_mining}
+\input{Chapter3/Mining_3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter{Pooled mining}
+%\section{Mining pool infrastructure}
+%\input{Chapter4/Pooled_Mining_1}
+%\newpage
+%\section{Mining pool ecosystem data}
+%\input{Chapter4/Pooled_Mining_2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{History of pooled mining protocols}
+\section{Getwork}
+\subsection{What is Getwork: why and when it was born}
+\input{Chapter5/Getwork/Getwork_1}
+\subsection{How Getwork works}
+\input{Chapter5/Getwork/Getwork_2}
+\subsection{Getwork usage into pooled mining and protocol extensions}
+\input{Chapter5/Getwork/Getwork_3}
+\subsection{Why Getwork usage ended up}
+\input{Chapter5/Getwork/Getwork_4}
+\newpage
+\section{Getblocktemplate (GBT)}
+\subsection{What is GBT: why and when it was born}
+\input{Chapter5/GBT/GBT_1}
+\subsection{How GBT works}
+\input{Chapter5/GBT/GBT_2}
+\subsection{Why GBT usage ended up}
+\input{Chapter5/GBT/GBT_3}
+\newpage
+\section{Stratum (V1)}\label{section:stratum}
+\subsection{What is Stratum (V1): why and when it was born}
+\input{Chapter5/Stratum/Stratum_1}
+\subsection{How Stratum (V1) works}
+\input{Chapter5/Stratum/Stratum_2}
+\newpage
+\subsection{Stratum (V1) vulnerabilities and security issues}
+\input{Chapter5/Stratum/Stratum_3}
+\newpage
+\subsection{Why Stratum (V1) needs to be updated}
+\input{Chapter5/Stratum/Stratum_4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Stratum V2}
+\section{What is SV2: why and when it was born}
+\input{Chapter6/StratumV2_1}
+\newpage
+\section{How SV2 works}
+\input{Chapter6/StratumV2_2}
+\newpage
+\section{Differences between SV1 and SV2}
+\input{Chapter6/StratumV2_3}
+\newpage
+\section{Current implementations}
+\input{Chapter6/StratumV2_4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Stratum Reference Implementation (SRI)}
+\section{How SRI works}
+\input{Chapter7/SRI_1}
+\newpage
+\section{Getting Started}
+\input{Chapter7/SRI_2}
+\newpage
+\section{Final thoughts and future ideas}
+\input{Chapter7/SRI_3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion}
+\input{Chapter8/Conclusion}
+
+%\bibliographystyle{plain}
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+
+\end{document}

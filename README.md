@@ -3,6 +3,7 @@
 # Stratum V2: the next generation protocol for Bitcoin pooled mining 
 
 ### Abstract
+<p align="justify">
 Bitcoin is a distributed, peer-to-peer electronic cash system.\
 Since the publication of its white paper, on 31st of October 2008, Bitcoin has experienced a very rapid evolution. Many aspects of the protocol has changed in the years, permitting it to keep up with the exponential growth in terms of users, services and companies involved into it.\
 The primary focus of the entire research centers on one of the fundamental pillars of the entire ecosystem: Bitcoin mining.
@@ -14,3 +15,4 @@ The current implementations of Stratum V2 are also discussed to provide a practi
 In addition to this, the thesis introduces the Stratum Reference Implementation (SRI), a key tool for understanding and experimenting with Stratum V2. Detailed explanations are provided on how SRI works, how to get started with it, and potential future directions for research and development.\
 The research concludes with a reflection on the advancements made in Stratum V2 and their implications for the future of Bitcoin pooled mining. The concept of SV2 protocol benchmarking is introduced, along with the exploration of non-custodial pools as a promising pathway for future innovation.
 Overall, this thesis aims to dig into the profound significance of Stratum V2 as a transformative protocol in the domain of Bitcoin pooled mining, and its potential to shape the landscape of mining practices in the years to come.
+</p>

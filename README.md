@@ -1,4 +1,4 @@
-## Master Degree Thesis - Computer Engineering - Politecnico di Torino
+## Master Degree Thesis - Computer Engineering - Politecnico di Torino &nbsp; &nbsp; <img align="center" src="https://ondequadre.polito.it/assets/img/logo_poli.png" width="120" height="55"> <img align="center" src="https://stratumprotocol.org/assets/stratum-v2-icon-with-text.svg" width="100" height="55">
 # Stratum V2: the next generation protocol for Bitcoin pooled mining 
 
 ### Abstract

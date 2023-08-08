@@ -25,3 +25,6 @@ Overall, this thesis aims to dig into the profound significance of Stratum V2 as
 + Chapter 5: '[Stratum V2](./Source/Chapter5/)'
 + Chapter 6: '[Stratum Reference Implementation (SRI)](./Source/Chapter6/)'
 + Chapter 7: '[Conclusion](./Source/Chapter7/Conclusion.tex)'
+
+### Eprint file from Politecnico Webthesis Repository
+It's possible to look at preview and download the Thesis also from here: [https://webthesis.biblio.polito.it/27678/](https://webthesis.biblio.polito.it/27678/) 
